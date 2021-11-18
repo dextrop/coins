@@ -32,7 +32,6 @@ class CoinPriceController():
             data = json.load(f)
             for element in data["coins"]:
                 element["prices"].append(prices[element["symbol"]]["prices"][0])
-                element["prices"] = element["prices"][(len( element["prices"]) - 10 ):len( element["prices"])]
             resp = data
 
         with open(file, 'w') as json_file:
@@ -46,6 +45,8 @@ class CoinPriceController():
         else:
             f = open(file, "r")
             data = json.load(f)
+            for element in data["coins"]:
+                element["prices"] = element["prices"][(len( element["prices"]) - 10 ):len( element["prices"])]
             return data
 
     def update_coin_price(self):
