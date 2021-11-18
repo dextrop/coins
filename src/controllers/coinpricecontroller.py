@@ -1,6 +1,6 @@
 import requests, json, os
 from django.core.exceptions import ValidationError
-file = "/Users/saurabhpandey/Desktop/ASKJennie/uigallery/crypto/backend/coins.json"
+file = "/root/coins/coins.json"
 
 class CoinPriceController():
 
