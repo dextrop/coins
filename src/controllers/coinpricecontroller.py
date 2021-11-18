@@ -39,6 +39,12 @@ class CoinPriceController():
 
         return resp
 
+    def get_avg_price_change_window(self, prices):
+        avg_change = 0
+        for i in range(1, len(prices)):
+            avg_change += prices[i] - prices[i-1]
+        return avg_change
+
     def get_coin_price(self):
         if not os.path.exists(file):
             raise ValidationError("Updates not available")
@@ -50,13 +56,7 @@ class CoinPriceController():
             }
             for element in data["coins"]:
                 element["prices"] = element["prices"][(len( element["prices"]) - 10 ):len( element["prices"])]
-                sum = 0
-                for price in element["prices"]:
-                    sum += price
-
-                avg = sum / len(element["prices"])
-
-                element["price_change"] = ( (avg - element["prices"][0]) / element["prices"][0] ) * 100
+                element["price_change"] = self.get_avg_price_change_window(element["prices"])
                 if element["symbol"] in avb:
                     resp["coins"].append(element)
             return resp
