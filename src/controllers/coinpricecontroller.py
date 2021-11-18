@@ -46,7 +46,7 @@ class CoinPriceController():
                 avg_change += prices[i] - prices[i-1]
             return ( avg_change / prices[0] ) * 100
         except Exception as e:
-            print (e)
+            return 0
 
     def get_coin_price(self):
         if not os.path.exists(file):
