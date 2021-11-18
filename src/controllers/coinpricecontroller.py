@@ -45,11 +45,13 @@ class CoinPriceController():
         else:
             f = open(file, "r")
             data = json.load(f)
-            resp = []
+            resp = {
+                "coins": []
+            }
             for element in data["coins"]:
                 element["prices"] = element["prices"][(len( element["prices"]) - 10 ):len( element["prices"])]
                 if element["symbol"] in avb:
-                    resp.append(element)
+                    resp["coins"].append(element)
             return resp
 
     def update_coin_price(self):
