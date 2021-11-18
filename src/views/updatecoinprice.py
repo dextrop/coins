@@ -9,7 +9,11 @@ class UpdateCoinPriceView(LoggingMixin, generics.GenericAPIView, mixins.UpdateMo
                      mixins.ListModelMixin):
 
     def get(self, requests):
-        Response = CoinPriceController().update_coin_price()
+        try:
+            Response = CoinPriceController().update_coin_price()
+        except Exception as e:
+            print (e)
+            Response = False
         return CustomResponse(message="Login Api view", payload=Response, code=HTTP_200_OK)
 
 
