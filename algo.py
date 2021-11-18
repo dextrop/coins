@@ -2,6 +2,13 @@
 import requests, os, json, time
 
 
+API = "https://api.binance.com/api/v3/exchangeInfo"
+RESP = requests.get(API)
+symbols = []
+for element in RESP.json()["symbols"]:
+    elm = element["symbol"].replace(element["quoteAsset"], "")
+    if elm not in symbols and len(elm) > 0:
+        symbols.append(elm)
 
-def check_prices():
+print (json.dumps(symbols))
 
