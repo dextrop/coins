@@ -57,6 +57,11 @@ class CoinPriceController():
             for element in data["coins"]:
                 element["prices"] = element["prices"][(len( element["prices"]) - 10 ):len( element["prices"])]
                 element["price_change"] = self.get_avg_price_change_window(element["prices"])
+                if element["price_change"] > 1:
+                    element["price_change"] = round(element["price_change"], 2)
+                else:
+                    element["price_change"] = round(element["price_change"], 4)
+
                 if element["symbol"] in avb:
                     resp["coins"].append(element)
             return resp
