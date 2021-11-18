@@ -50,6 +50,13 @@ class CoinPriceController():
             }
             for element in data["coins"]:
                 element["prices"] = element["prices"][(len( element["prices"]) - 10 ):len( element["prices"])]
+                sum = 0
+                for price in element["prices"]:
+                    sum += price
+
+                avg = sum / len(element["prices"])
+
+                element["price_change"] = ( (avg - element["prices"][0]) / element["prices"][0] ) * 100
                 if element["symbol"] in avb:
                     resp["coins"].append(element)
             return resp
