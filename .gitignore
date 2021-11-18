@@ -1,0 +1,7 @@
+venv/
+venv2/
+logs/*.log.*
+logs/*.log
+*.pyc
+db.sqlite3
+.idea/
